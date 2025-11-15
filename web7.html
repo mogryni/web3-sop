@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 SOP 第七层 - 职业机会与实战路线完全指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        header {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            border-left: 6px solid #667eea;
+        }
+
+        header h1 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .header-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .meta-label {
+            font-size: 13px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .meta-value {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .content-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content-section h3 {
+            font-size: 22px;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .content-section h4 {
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-section ul, .content-section ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .content-section li {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(102, 126, 234, 0.03);
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box strong {
+            color: #667eea;
+        }
+
+        .warning-box {
+            background: white;
+            border-left: 6px solid #FFC107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .warning-box strong {
+            color: #FF9800;
+        }
+
+        .job-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .job-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .job-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .job-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .job-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .checklist {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .checklist h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .checklist-item label {
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav button {
+            padding: 14px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-nav .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer-nav .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer-nav .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .footer-nav .btn-secondary:hover {
+            background: #f8f9ff;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .footer-nav {
+                flex-direction: column;
+            }
+
+            .footer-nav button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="web3_sop_index_v4.html">🏠 主页</a> / 
+            <a href="web3_sop_layer6_balanced.html">第六层</a> / 
+            <span style="color: #667eea; font-weight: 700;">第七层 - 职业机会与实战路线</span>
+        </div>
+
+        <header>
+            <h1>🚀 第七层：Web3职业机会与实战进入路线完全指南</h1>
+            <p style="font-size: 16px; color: #666; margin-top: 10px;">掌握2025年最新的Web3职业机会、薪资水平、招聘流程和快速进入策略 - 从零基础到获得第一份Web3工作的完整路线图</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <div class="meta-label">⏱️ 实战周期</div>
+                    <div class="meta-value">1-6个月</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">💼 职位数量</div>
+                    <div class="meta-value">15000+</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">💰 平均薪资</div>
+                    <div class="meta-value">$120K-200K</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">🌍 远程比例</div>
+                    <div class="meta-value">92%+</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 第一部分：Web3职业机会全景 -->
+        <div class="content-section">
+            <h2>1️⃣ 2025年Web3职业机会全景分析</h2>
+            
+            <h3>Web3就业市场现状与趋势</h3>
+            <p><strong>2025年是Web3职业发展的黄金时期</strong>。与2023年的熊市不同，2025年Web3行业从"投机阶段"转向"建设阶段"。这意味着真正的项目和产品在招募真正的专业人才。根据最新数据，全球Web3职位需求超过<strong>15,000个活跃岗位</strong>，而供应远远不足。</p>
+
+            <div class="highlight-box">
+                <strong>💡 2025年Web3行业三大转变：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li><strong>从炒作到建设：</strong> 不再是"快速致富"的幻想，而是真实的技术和产品开发</li>
+                    <li><strong>从中心化到去中心化：</strong> DAO、社区贡献、代币激励成为主流</li>
+                    <li><strong>从技术到实用：</strong> Layer 2扩展、AI与区块链结合、真实应用场景</li>
+                </ul>
+            </div>
+
+            <h3>Web3职位数量统计（2025年）</h3>
+            <p>不同职位类别的需求分布反映了行业的发展重点：</p>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>职位分类</th>
+                        <th>活跃职位数</th>
+                        <th>占比</th>
+                        <th>增长趋势</th>
+                        <th>竞争激烈程度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>技术类（开发）</strong></td>
+                        <td>6,500</td>
+                        <td>43%</td>
+                        <td>↑↑↑ 最快增长</td>
+                        <td>中等（供应不足）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>非技术类</strong></td>
+                        <td>5,200</td>
+                        <td>35%</td>
+                        <td>↑↑ 快速增长</td>
+                        <td>高（供应过剩）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>设计类（UI/UX）</strong></td>
+                        <td>1,800</td>
+                        <td>12%</td>
+                        <td>↑ 稳定增长</td>
+                        <td>低（高需求）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>数据与分析</strong></td>
+                        <td>1,500</td>
+                        <td>10%</td>
+                        <td>↑↑ 快速增长</td>
+                        <td>中等</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>最重要的认知：职位需求严重不均</h3>
+            <p><strong>这非常关键：</strong> Web3职位看似很多（15,000+），但分布高度不均。<strong>开发类职位竞争最少但要求最高，非技术类职位竞争最激烈。</strong>这意味着：</p>
+            <ul>
+                <li>🔴 <strong>社区经理职位</strong> - 数百人竞争一个职位。非常难进</li>
+                <li>🟡 <strong>营销职位</strong> - 竞争激烈但有机会。需要强项目作品集</li>
+                <li>🟢 <strong>开发职位</strong> - 竞争较少但技术要求高。学好Solidity就有机会</li>
+                <li>🟢 <strong>设计职位</strong> - 高需求低竞争。会设计+了解Web3就很有优势</li>
+            </ul>
+        </div>
+
+        <!-- 第二部分：详细职位介绍 -->
+        <div class="content-section">
+            <h2>2️⃣ 2025年最有前景的Web3职位详解</h2>
+            
+            <h3>A. 技术类职位（最有潜力）</h3>
+
+            <div class="job-card">
+                <div class="job-title">
+                    <span class="job-badge">🥇 最热门</span>
+                    Smart Contract Developer（智能合约开发者）
+                </div>
+                <div class="job-description">
+                    编写和部署以太坊、Solana等链上的智能合约。这是Web3最核心的职位。
+                </div>
+                <div class="job-info">
+                    <div class="info-item">
+                        <span class="info-label">入门级薪资</span>
+                        <span class="info-value">$90K-130K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">中级薪资</span>
+                        <span class="info-value">$140K-190K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">高级薪资</span>
+                        <span class="info-value">$210K-300K+</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">学习周期</span>
+                        <span class="info-value">6-12个月</span>
+                    </div>
+                </div>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">所需技能：</h4>
+                <ul>
+                    <li><strong>必需：</strong> Solidity编程、以太坊、智能合约安全</li>
+                    <li><strong>加分：</strong> Rust（Solana开发）、Web3库（OpenZeppelin）、审计经验</li>
+                    <li><strong>核心素质：</strong> 安全意识、代码质量、漏洞分析能力</li>
+                </ul>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">进入路径（推荐）：</h4>
+                <p>学习Solidity（2-3个月）→ 做小项目（1-2个月）→ GitHub展示（1个月）→ 参加Hackathon或赏金计划（1-2个月）→ 投递简历。这样最快4-6个月可以获得第一份工作。</p>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">招聘公司：</h4>
+                <p>Ethereum基金会、Consensys、OpenZeppelin、a16z crypto、Paradigm、顶级DeFi项目（Aave、Uniswap、MakerDAO）</p>
+            </div>
+
+            <div class="job-card">
+                <div class="job-title">
+                    <span class="job-badge">🥈 竞争少</span>
+                    Full-Stack Web3 Developer（全栈开发者）
+                </div>
+                <div class="job-description">
+                    结合前端（React、Vue）和后端（Node.js、Rust）能力，开发完整的DApp。需要同时懂传统Web和Web3。
+                </div>
+                <div class="job-info">
+                    <div class="info-item">
+                        <span class="info-label">入门级薪资</span>
+                        <span class="info-value">$85K-120K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">中级薪资</span>
+                        <span class="info-value">$130K-170K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">高级薪资</span>
+                        <span class="info-value">$190K-250K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">学习周期</span>
+                        <span class="info-value">3-6个月</span>
+                    </div>
+                </div>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">所需技能：</h4>
+                <ul>
+                    <li><strong>必需：</strong> React/Vue、Node.js、Web3.js/Ethers.js、智能合约基础</li>
+                    <li><strong>加分：</strong> TypeScript、数据库设计、API设计</li>
+                    <li><strong>核心优势：</strong> 如果你已经是Web2开发者，转向Web3最快的路径</li>
+                </ul>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">进入路径：</h4>
+                <p>如果已是Web2开发：学习Web3基础（1个月）→ 做一个DApp项目（1-2个月）→ GitHub展示 → 投递简历。速度最快，只需2-3个月。</p>
+            </div>
+
+            <div class="job-card">
+                <div class="job-title">
+                    <span class="job-badge">💎 高薪</span>
+                    Smart Contract Auditor / Security Engineer（审计师/安全工程师）
+                </div>
+                <div class="job-description">
+                    审查智能合约代码寻找漏洞。是最高薪的Web3职位，因为安全至关重要。但要求最高。
+                </div>
+                <div class="job-info">
+                    <div class="info-item">
+                        <span class="info-label">入门级薪资</span>
+                        <span class="info-value">$120K-150K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">中级薪资</span>
+                        <span class="info-value">$170K-240K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">高级薪资</span>
+                        <span class="info-value">$250K-400K+</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">学习周期</span>
+                        <span class="info-value">12-24个月</span>
+                    </div>
+                </div>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">所需技能：</h4>
+                <ul>
+                    <li><strong>必需：</strong> 高级Solidity、安全漏洞分析、数学和密码学基础</li>
+                    <li><strong>加分：</strong> 正式验证、审计工具（Slither、MythX）、参加过审计工作</li>
+                    <li><strong>核心优势：</strong> 需要3-5年Web3和安全经验</li>
+                </ul>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">进入路径：</h4>
+                <p>这不是初学者职位。必须先做2-3年的开发工作，深入理解智能合约安全，然后才能转向审计。参加Code4rena等审计赏金计划来积累经验。</p>
+            </div>
+
+            <div class="job-card">
+                <div class="job-title">
+                    <span class="job-badge">📊 数据分析</span>
+                    On-Chain Data Analyst（链上数据分析师）
+                </div>
+                <div class="job-description">
+                    分析区块链数据，提供市场见解。使用SQL、Python分析智能合约交互、资金流向等。竞争比社区经理少得多。
+                </div>
+                <div class="job-info">
+                    <div class="info-item">
+                        <span class="info-label">薪资范围</span>
+                        <span class="info-value">$85K-180K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">学习周期</span>
+                        <span class="info-value">2-4个月</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">竞争程度</span>
+                        <span class="info-value">⭐⭐ 中等</span>
+                    </div>
+                </div>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">所需技能：</h4>
+                <ul>
+                    <li><strong>必需：</strong> SQL、Python、数据分析、Dune Analytics或Nansen</li>
+                    <li><strong>加分：</strong> 统计学、机器学习、数据可视化</li>
+                </ul>
+            </div>
+
+	    <h3>B. 非技术类职位（需求多但竞争激烈）</h3>
+           
+	    <div class="job-card">
+                <div class="job-title">
+                    <span class="job-badge">⚠️ 竞争激烈</span>
+                    Web3 Community Manager（社区经理）
+                </div>
+                <div class="job-description">
+                    管理Discord、Twitter社区。看似容易但竞争最激烈。数百人竞争一个职位。
+                </div>
+                <div class="job-info">
+                    <div class="info-item">
+                        <span class="info-label">薪资范围</span>
+                        <span class="info-value">$45K-100K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">学习周期</span>
+                        <span class="info-value">即刻</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">竞争程度</span>
+                        <span class="info-value">🔴 极激烈</span>
+                    </div>
+                </div>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">突出重围的方式：</h4>
+                <ul>
+                    <li>不要说"我想做社区经理"，而是<strong>先做后证明</strong>：加入某个项目的社区，积极参与，成为活跃成员，然后才被邀请正式加入</li>
+                    <li>建立自己的小社区，证明你能吸引人</li>
+                    <li>做过投资/交易并赚钱 - 证明你理解市场</li>
+                </ul>
+            </div>
+
+            <div class="job-card">
+                <div class="job-title">
+                    <span class="job-badge">🎯 增长快</span>
+                    DAO Treasury Manager（DAO国库经理）
+                </div>
+                <div class="job-description">
+                    管理DAO的资金和投资组合。这是2025年最新兴的职位之一，竞争还不那么激烈。
+                </div>
+                <div class="job-info">
+                    <div class="info-item">
+                        <span class="info-label">薪资范围</span>
+                        <span class="info-value">$80K-200K+</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">学习周期</span>
+                        <span class="info-value">2-3个月</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">竞争程度</span>
+                        <span class="info-value">⭐⭐ 中等</span>
+                    </div>
+                </div>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">所需技能：</h4>
+                <ul>
+                    <li><strong>必需：</strong> 财务基础、DeFi知识、投资分析、风险管理</li>
+                    <li><strong>加分：</strong> 参加过DAO投票、有投资经历</li>
+                </ul>
+            </div>
+
+            <h3>C. 设计类职位（高需求低竞争）</h3>
+
+            <div class="job-card">
+                <div class="job-title">
+                    <span class="job-badge">✨ 高机会</span>
+                    Web3 UX/UI Designer（设计师）
+                </div>
+                <div class="job-description">
+                    为DApp设计用户界面。好的设计让复杂的Web3应用变得易用。高度稀缺。
+                </div>
+                <div class="job-info">
+                    <div class="info-item">
+                        <span class="info-label">薪资范围</span>
+                        <span class="info-value">$65K-180K</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">学习周期</span>
+                        <span class="info-value">1-2个月</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">竞争程度</span>
+                        <span class="info-value">⭐ 很低</span>
+                    </div>
+                </div>
+                <h4 style="margin-top: 15px; margin-bottom: 10px;">进入路径（最快）：</h4>
+                <p>如果你已经是设计师：只需学习Web3特殊需求（钱包、交易、安全等）→ 做一个DApp设计作品集 → 投递简历。可能最快的进入Web3的方式。</p>
+            </div>
+        </div>
+
+        <!-- 第三部分：薪资详细数据 -->
+        <div class="content-section">
+            <h2>3️⃣ 2025年Web3薪资数据详解</h2>
+            
+            <h3>全球Web3薪资范围</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>职位</th>
+                        <th>入门级</th>
+                        <th>中级</th>
+                        <th>高级/Lead</th>
+                        <th>年增长</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Smart Contract Engineer</strong></td>
+                        <td>$95K</td>
+                        <td>$160K</td>
+                        <td>$230K+</td>
+                        <td>+25%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Full-Stack Web3 Developer</strong></td>
+                        <td>$85K</td>
+                        <td>$135K</td>
+                        <td>$200K</td>
+                        <td>+22%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rust Developer (Solana)</strong></td>
+                        <td>$100K</td>
+                        <td>$155K</td>
+                        <td>$225K+</td>
+                        <td>+28%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Web3 Security Engineer</strong></td>
+                        <td>$120K</td>
+                        <td>$190K</td>
+                        <td>$280K+</td>
+                        <td>+30%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Web3 Product Manager</strong></td>
+                        <td>$80K</td>
+                        <td>$125K</td>
+                        <td>$190K</td>
+                        <td>+20%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Web3 Designer (UI/UX)</strong></td>
+                        <td>$65K</td>
+                        <td>$90K</td>
+                        <td>$140K</td>
+                        <td>+18%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Community Manager</strong></td>
+                        <td>$45K</td>
+                        <td>$70K</td>
+                        <td>$100K</td>
+                        <td>+15%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>地域薪资差异（中级职位参考）</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>地区</th>
+                        <th>平均年薪（USD）</th>
+                        <th>房价/生活成本</th>
+                        <th>净收入优势</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🇺🇸 USA（旧金山湾区）</td>
+                        <td>$145K+</td>
+                        <td>🔴 极高</td>
+                        <td>中等</td>
+                    </tr>
+                    <tr>
+                        <td>🇨🇭 Switzerland（苏黎世）</td>
+                        <td>$140K+</td>
+                        <td>🔴 极高</td>
+                        <td>中等</td>
+                    </tr>
+                    <tr>
+                        <td>🇸🇬 Singapore</td>
+                        <td>$135K</td>
+                        <td>🟡 高</td>
+                        <td>高</td>
+                    </tr>
+                    <tr>
+                        <td>🇩🇪 Germany（柏林）</td>
+                        <td>$115K</td>
+                        <td>🟡 中等</td>
+                        <td>🟢 很高</td>
+                    </tr>
+                    <tr>
+                        <td>🇬🇧 UK（伦敦）</td>
+                        <td>$125K</td>
+                        <td>🔴 高</td>
+                        <td>中等</td>
+                    </tr>
+                    <tr>
+                        <td>🌏 东南亚（Bangkok、Chiang Mai）</td>
+                        <td>$80K-100K</td>
+                        <td>🟢 低</td>
+                        <td>🟢🟢 极高</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Web3 vs Web2薪资对比</h3>
+            <p><strong>平均来说，Web3开发者比Web2开发者薪资高15-30%，且有额外的代币激励。</strong></p>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>职位</th>
+                        <th>Web2薪资</th>
+                        <th>Web3薪资</th>
+                        <th>增幅</th>
+                        <th>额外好处</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Frontend Developer</strong></td>
+                        <td>$110K</td>
+                        <td>$130K</td>
+                        <td>+18%</td>
+                        <td>代币期权</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backend Developer</strong></td>
+                        <td>$120K</td>
+                        <td>$145K</td>
+                        <td>+21%</td>
+                        <td>代币期权</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Full-Stack Developer</strong></td>
+                        <td>$125K</td>
+                        <td>$150K</td>
+                        <td>+20%</td>
+                        <td>代币期权</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <strong>💡 关于Web3代币激励：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li><strong>现象：</strong> 38%的Web3职位提供代币作为薪资的一部分（对比Web2只有不到5%的企业股票）</li>
+                    <li><strong>风险：</strong> 代币价值波动剧烈。你拿100K USD现金 + 50K代币的工作，如果币价跌50%，实际只赚75K</li>
+                    <li><strong>建议：</strong> 看项目基本面，不要被高数字迷惑。优先选现金，代币作为额外奖励</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 第四部分：快速进入路径 -->
+        <div class="content-section">
+            <h2>4️⃣ 从零到第一份Web3工作的实战路线图</h2>
+            
+            <h3>四大进入路径 - 选择适合你的</h3>
+
+            <h4>✅ 路径A：技术型进入（最推荐，薪资最高）</h4>
+            <p style="color: #667eea; font-weight: 700;">适合人群：有编程基础或想从零学编程的人</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">第1-2个月：学习基础Solidity</div>
+                    <div class="timeline-desc">
+                        ✓ 完成Patrick Collins课程（YouTube上的"Solidity, Blockchain, and Smart Contracts Course"）<br>
+                        ✓ 学习CryptoZombies交互式教程<br>
+                        ✓ 理解ERC-20、ERC-721标准<br>
+                        ✓ 目标：能写简单的合约
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">第3-4个月：实际开发项目</div>
+                    <div class="timeline-desc">
+                        ✓ 学习Hardhat或Foundry<br>
+                        ✓ 做3-5个小项目（Token、Staking、简单DEX）<br>
+                        ✓ 全部上传GitHub，写清楚文档<br>
+                        ✓ 目标：有真实代码作品集
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">第5-6个月：参加竞争/赏金</div>
+                    <div class="timeline-desc">
+                        ✓ 参加Code4rena或Sherlock审计竞赛<br>
+                        ✓ 参加Capture the Ether等安全赛<br>
+                        ✓ 获胜/排名证明技术实力<br>
+                        ✓ 目标：有竞赛成绩，建立业界知名度
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">第7-8个月：投递简历</div>
+                    <div class="timeline-desc">
+                        ✓ 投递协议类项目（Uniswap、Aave等）<br>
+                        ✓ 投递基础设施公司（Alchemy、Infura）<br>
+                        ✓ 投递Layer 2解决方案<br>
+                        ✓ 目标：获得面试机会，最终offer
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <strong>💡 这条路的优势：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>✅ 薪资最高（$90K-200K+）</li>
+                    <li>✅ 职位最多（不会失业）</li>
+                    <li>✅ 市场需求超过供应</li>
+                    <li>✅ 没有很多人知道的秘密：大多数人想进Web3都卡在找工作阶段，而开发者一个月就能收到offer</li>
+                </ul>
+            </div>
+
+            <h4 style="margin-top: 30px;">✅ 路径B：非技术但有策略（快速但竞争大）</h4>
+            <p style="color: #667eea; font-weight: 700;">适合人群：营销、运营、产品经理背景</p>
+            
+            <ul>
+                <li><strong>第1个月：深入学习Web3</strong> - 了解DeFi、NFT、治理、代币经济学</li>
+                <li><strong>第2个月：建立个人品牌</strong> - 在Twitter写见解，参与讨论，建立粉丝</li>
+                <li><strong>第3个月：做一个小项目</strong> - 不需要代码，可以是社区建设、内容、分析</li>
+                <li><strong>第4-5个月：参与DAO或项目</strong> - 先以贡献者身份加入，证明价值</li>
+                <li><strong>第6个月：转为正式员工</strong> - 从社区贡献者升级为正式雇员</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>⚠️ 这条路的风险：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>❌ 竞争最激烈（几百人竞争一个职位）</li>
+                    <li>❌ 薪资相对较低（$45K-100K）</li>
+                    <li>❌ 职位稳定性差（取决于项目融资）</li>
+                </ul>
+            </div>
+
+            <h4 style="margin-top: 30px;">✅ 路径C：设计师进入（最容易但知道的人少）</h4>
+            <p style="color: #667eea; font-weight: 700;">适合人群：UI/UX设计师</p>
+            
+            <ul>
+                <li><strong>第1-2周：学习Web3特殊需求</strong> - 钱包、交易、Gas费等</li>
+                <li><strong>第3-6周：做3个DApp设计作品集</strong> - DEX、NFT市场、Staking平台</li>
+                <li><strong>第7-8周：投递简历</strong> - 找专注DApp设计的公司</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>💡 为什么这么快？</strong>
+                <p style="margin-top: 10px;">Web3好的设计师极其稀缺。很多项目界面很丑陋，用户体验差。如果你能做出好看好用的DApp，需求暴增。</p>
+            </div>
+
+            <h4 style="margin-top: 30px;">✅ 路径D：Data Analyst/Treasury进入（增长最快）</h4>
+            <p style="color: #667eea; font-weight: 700;">适合人群：有数据分析或金融背景</p>
+            
+            <ul>
+                <li><strong>第1个月：学习链上数据分析</strong> - Dune Analytics、SQL</li>
+                <li><strong>第2个月：做5个数据分析报告</strong> - 发布在Dune上获得关注</li>
+                <li><strong>第3个月：投递简历</strong> - DAO Treasury、协议、数据公司</li>
+            </ul>
+        </div>
+
+        <!-- 第五部分：招聘流程详解 -->
+        <div class="content-section">
+            <h2>5️⃣ Web3公司招聘流程详解</h2>
+            
+            <h3>Web3招聘与传统公司的区别</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>方面</th>
+                        <th>传统公司</th>
+                        <th>Web3公司</th>
+                        <th>Web3优势</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>简历审查</strong></td>
+                        <td>看学历、证书</td>
+                        <td>看GitHub、代码、作品</td>
+                        <td>学历无关！只看能力</td>
+                    </tr>
+                    <tr>
+                        <td><strong>面试形式</strong></td>
+                        <td>行为面试为主</td>
+                        <td>技术和文化面试</td>
+                        <td>公平透明</td>
+                    </tr>
+                    <tr>
+                        <td><strong>招聘周期</strong></td>
+                        <td>3-6个月</td>
+                        <td>2-3周</td>
+                        <td>特别快！</td>
+                    </tr>
+                    <tr>
+                        <td><strong>工作地点</strong></td>
+                        <td>固定办公室</td>
+                        <td>100%远程</td>
+                        <td>自由度最高</td>
+                    </tr>
+                    <tr>
+                        <td><strong>付款方式</strong></td>
+                        <td>纯现金</td>
+                        <td>现金+代币/股权</td>
+                        <td>成长潜力大</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>标准的Web3招聘流程（Smart Contract Developer为例）</h3>
+            <p style="margin-bottom: 20px;"><strong>用时：2-3周，比传统公司快10倍</strong></p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-title">第1-2天：投递简历</div>
+                    <div class="timeline-desc">
+                        ✓ 在公司网站、AngelList、Mirror上投递<br>
+                        ✓ 准备内容：简历 + GitHub链接 + 代码作品集
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">第3-5天：代码评估</div>
+                    <div class="timeline-desc">
+                        ✓ 公司review你的GitHub代码质量<br>
+                        ✓ 可能让你完成一个小的编码任务（2-4小时）<br>
+                        ✓ 通过即进入下一轮
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">第6-8天：技术面试1</div>
+                    <div class="timeline-desc">
+                        ✓ 与公司技术人员视频面试（1小时）<br>
+                        ✓ 讨论你的项目、设计、权衡<br>
+                        ✓ 可能有算法或Solidity题目<br>
+                        ✓ 通过即可进final round
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">第9-10天：文化/最终面试</div>
+                    <div class="timeline-desc">
+                        ✓ 与团队或领导面试（30-60分钟）<br>
+                        ✓ 讨论工作方式、期望、团队文化<br>
+                        ✓ 这一轮通常就是决策轮
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-title">第11-14天：Offer</div>
+                    <div class="timeline-desc">
+                        ✓ 收到offer及薪资package<br>
+                        ✓ 现金+代币/股权+福利<br>
+                        ✓ 通常几天内需要回复
+                    </div>
+                </div>
+            </div>
+
+            <h3>准备最佳策略</h3>
+            <h4>简历准备</h4>
+            <p><strong>Web3简历和传统简历完全不同。最重要的是GitHub和作品集。</strong></p>
+            <ul>
+                <li>❌ 不要写"想进入Web3"、"对区块链感兴趣"</li>
+                <li>✅ 写具体做过什么：做过哪些Solidity项目、参加过哪些Hackathon、赢过哪些奖</li>
+                <li>✅ GitHub链接必须放在简历最上面</li>
+                <li>✅ 链接你的优质作品库（最多3-5个）</li>
+            </ul>
+
+            <h4>GitHub作品集准备</h4>
+            <ul>
+                <li>✅ 代码要整洁，有注释</li>
+                <li>✅ README要详细：项目做什么、怎么用、技术栈</li>
+                <li>✅ 最好有测试用例和部署说明</li>
+                <li>✅ 要展示代码审视和最佳实践</li>
+            </ul>
+
+            <h4>面试常见问题</h4>
+            <ul>
+                <li><strong>"为什么你想加入Web3？"</strong> - 不要说"赚钱"，要说"看好去中心化未来"、"想做有影响力的项目"</li>
+                <li><strong>"你对我们的项目了解多少？"</strong> - 必须提前研究，看whitepaper、代码、最新进展</li>
+                <li><strong>"Smart Contract安全需要注意什么？"</strong> - 回答CEI模式、重入攻击、overflow</li>
+                <li><strong>"你做过的最复杂的项目是什么？"</strong> - 详细讲述技术挑战和解决方案</li>
+            </ul>
+        </div>
+
+        <!-- 第六部分：真实成功故事 -->
+        <div class="content-section">
+            <h2>6️⃣ 真实成功案例分析</h2>
+            
+            <h3>案例1：从Web2开发者到Smart Contract Developer</h3>
+            <p><strong>背景：</strong> 35岁的Node.js开发者，在传统科技公司有8年经验，年薪$120K</p>
+            <p><strong>转变过程：</strong></p>
+            <ul>
+                <li>月1：学习Solidity + Hardhat（利用下班时间，花了60小时）</li>
+                <li>月2：做两个小项目，上传GitHub</li>
+                <li>月3：参加一个Hackathon，获得第二名</li>
+                <li>月3末：投递5个职位</li>
+                <li>月4：收到3个offer，选择年薪$170K + 代币奖励</li>
+            </ul>
+            <p><strong>关键要素：</strong> 已有编程基础，只需学Web3特有部分。速度极快。这是最快的进入方式。</p>
+
+            <h3>案例2：从零基础到全栈DApp开发者</h3>
+            <p><strong>背景：</strong> 22岁大学生，无工作经验，想进Web3</p>
+            <p><strong>转变过程：</strong></p>
+            <ul>
+                <li>月1-2：完成Patrick Collins Solidity课程 + CryptoZombies</li>
+                <li>月3：学习React + Web3.js，开始做DApp</li>
+                <li>月4-5：完成3个完整的小DApp（DEX、NFT Gallery、Staking）</li>
+                <li>月6：投递简历</li>
+                <li>月6末：获得初创公司offer，年薪$85K</li>
+            </ul>
+            <p><strong>关键要素：</strong> 系统学习 + 实际项目。虽然薪资不算最高但足够生活且快速增长。</p>
+
+            <h3>案例3：从社区贡献到DAO正式员工</h3>
+            <p><strong>背景：</strong> 产品经理背景，想转向Web3</p>
+            <p><strong>转变过程：</strong></p>
+            <ul>
+                <li>月1：加入某个DAO的Discord社区</li>
+                <li>月1-2：积极参与讨论，建议改进</li>
+                <li>月3：被邀请成为正式社区贡献者</li>
+                <li>月4：DAO见识到你的价值，邀请成为正式产品经理</li>
+                <li>月5：签订兼职contract</li>
+                <li>月6：转为全职，年薪$100K</li>
+            </ul>
+            <p><strong>关键要素：</strong> 从小开始，用行动证明价值。这是非技术背景最可行的路。</p>
+        </div>
+
+        <!-- 学习检查清单 -->
+        <div class="content-section">
+            <h2>✅ 第七层行动检查清单</h2>
+            <p style="margin-bottom: 20px; color: #666;">完成这个清单，为进入Web3工作做好准备：</p>
+            
+            <div class="checklist">
+                <h4>📚 知识准备</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">了解Web3所有主要职位及薪资</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">明确你的职业目标和进入路径</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">理解Web3招聘流程的独特性</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">知道竞争最少的职位是什么</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>🎯 行动准备</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">建立GitHub账户，准备作品集</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">开始学习你选择的技能（Solidity/设计/数据等）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">制定3-6个月进入Web3工作的具体计划</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">加入Web3社区（Twitter、Discord、Mirror）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9">跟踪Web3职位板（AngelList、Mirror Jobs、Web3.career）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10">建立个人品牌（Twitter、博客或GitHub）</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 推荐资源 -->
+        <div class="content-section">
+            <h2>📚 推荐的求职资源与网站</h2>
+            
+            <h3>求职网站（按推荐度）</h3>
+            <ul>
+                <li><strong>🥇 AngelList（angel.co）</strong> - Web3职位最多的地方，超过10,000个活跃职位，应聘流程最标准</li>
+                <li><strong>🥈 Mirror（mirror.xyz）</strong> - 一些初创公司会在Mirror上发布职位，竞争较少</li>
+                <li><strong>🥉 LinkedIn Crypto Jobs</strong> - 大公司职位多，但竞争也大</li>
+                <li><strong>Web3.career</strong> - 专一的Web3职位聚合平台</li>
+                <li><strong>DAO Talent</strong> - 专门的DAO职位板</li>
+            </ul>
+
+            <h3>学习资源（按优先级）</h3>
+            <ul>
+                <li><strong>编程入门：</strong> Patrick Collins YouTube课程（最推荐）</li>
+                <li><strong>Solidity练习：</strong> CryptoZombies（最好的交互式教程）</li>
+                <li><strong>安全知识：</strong> OpenZeppelin文档 + Slither工具</li>
+                <li><strong>行业资讯：</strong> Bankless、The Defiant等newsletter</li>
+                <li><strong>数据分析：</strong> Dune Analytics官方教程</li>
+            </ul>
+
+            <h3>社区与网络</h3>
+            <ul>
+                <li><strong>Twitter Web3社区：</strong> 关注@solidity_lang、@OpenZeppelin、@_davidyat等</li>
+                <li><strong>Discord社区：</strong> Ethereum主社区、各大项目社区、Hackathon服务器</li>
+                <li><strong>线上活动：</strong> ETHGlobal Hackathon、Web3组织的meetup</li>
+            </ul>
+        </div>
+
+        <!-- 最后的建议 -->
+        <div class="content-section">
+            <h2>💡 最终建议与心态</h2>
+            
+            <div class="highlight-box">
+                <strong>给想进入Web3工作的人的5个建议：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li><strong>1. 不要等"准备好了"：</strong> 80%的学习来自实际工作。现在就开始做项目，边学边做。</li>
+                    <li><strong>2. 技术类职位是捷径：</strong> 如果你有任何编程基础，转向Smart Contract最快。社区经理职位听起来容易但竞争地狱。</li>
+                    <li><strong>3. GitHub就是你的简历：</strong> 好看的代码代表一切。学位、证书都可以不要，但GitHub必须优质。</li>
+                    <li><strong>4. 建立个人品牌：</strong> 在Twitter、Mirror、GitHub展示你的进展。被发现的概率远高于投递简历。</li>
+                    <li><strong>5. 贡献多于求职：</strong> 参加Hackathon、Code4rena、DAO工作，先建立信誉再找全职。</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 避免的误区：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>❌ 不要投递社区经理职位除非你已经有很强的个人品牌</li>
+                    <li>❌ 不要相信"保证工作"的培训课程（大多是骗局）</li>
+                    <li>❌ 不要在没理解代码的情况下复制粘贴</li>
+                    <li>❌ 不要隐瞒你是初学者（诚实是Web3文化）</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 30px; font-size: 16px; color: #333; line-height: 2;"><strong>Web3是真正的"能力至上"世界。不看你的背景、学位、年龄，只看你能做什么。如果你能写好智能合约或做好设计，就有人会要你。这是最公平的行业。现在就开始吧。</strong></p>
+        </div>
+
+        <!-- 底部导航 -->
+        <div class="footer-nav">
+            <button class="btn-secondary" onclick="window.location.href='web6.html'">⬅️ 返回第六层</button>
+            <button class="btn-secondary" onclick="window.location.href='home.html'">⬅️ 返回主页</button>
+            <button class="btn-primary" onclick="alert('恭喜完成第七层！这是Web3 SOP的最后一层。现在你已经从0了解到进入职场。准备好开始行动了吗？')">🎉 完成全部七层</button>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(this.id, this.checked);
+            });
+            this.checked = localStorage.getItem(checkbox.id) === 'true';
+        });
+
+        window.addEventListener('load', function() {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

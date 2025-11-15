@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 SOP 第二层 - DeFi完全指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 导航栏 */
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* 头部 */
+        header {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            border-left: 6px solid #667eea;
+        }
+
+        header h1 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .header-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .meta-label {
+            font-size: 13px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .meta-value {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        /* 内容区域 */
+        .content-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content-section h3 {
+            font-size: 22px;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-section ul, .content-section ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .content-section li {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        /* 表格 */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(102, 126, 234, 0.03);
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 盒子 */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box strong {
+            color: #667eea;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.08) 0%, rgba(255, 152, 0, 0.08) 100%);
+            border-left: 5px solid #FFC107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .warning-box strong {
+            color: #FF9800;
+        }
+
+        /* 概念卡片 */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            border-radius: 12px;
+            padding: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .concept-card h4 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .concept-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* 检查清单 */
+        .checklist {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .checklist h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .checklist-item label {
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        /* 推荐大V部分 */
+        .influencers-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .influencers-section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .platform-group {
+            margin-bottom: 40px;
+        }
+
+        .platform-group h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .influencers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .influencer-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .influencer-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .influencer-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .influencer-info h4 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .influencer-handle {
+            font-size: 12px;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .influencer-followers {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .influencer-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* 底部导航 */
+        .footer-nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a, .footer-nav button {
+            padding: 14px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-nav .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer-nav .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer-nav .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .footer-nav .btn-secondary:hover {
+            background: #f8f9ff;
+        }
+
+        /* DeFi协议对比卡片 */
+        .protocol-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .protocol-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .protocol-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .protocol-tvl {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .protocol-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .feature-tag {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        /* 实际案例 */
+        .case-study {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .case-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .case-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .case-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-label {
+            font-size: 12px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .case-value {
+            font-size: 16px;
+            color: #667eea;
+            font-weight: 700;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .comparison-table {
+                font-size: 12px;
+            }
+
+            .comparison-table th, .comparison-table td {
+                padding: 12px;
+            }
+
+            .protocol-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .influencers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .content-section {
+                padding: 15px;
+            }
+
+            .protocol-features {
+                grid-template-columns: 1fr;
+            }
+
+            .influencers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-nav {
+                flex-direction: column;
+            }
+
+            .footer-nav a, .footer-nav button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <a href="web3_sop_index_v2.html">🏠 主页</a> / 
+            <a href="web3_sop_layer1_v2.html">第一层</a> / 
+            <span style="color: #667eea; font-weight: 700;">第二层 - DeFi完全指南</span>
+        </div>
+
+        <!-- 头部 -->
+        <header>
+            <h1>💰 第二层：去中心化金融（DeFi）完全指南</h1>
+            <p style="font-size: 16px; color: #666; margin-top: 10px;">深入理解DeFi生态 - 借贷、交换、稳定币、衍生品和收益策略</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <div class="meta-label">⏱️ 学习周期</div>
+                    <div class="meta-value">1-2周</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">📊 难度等级</div>
+                    <div class="meta-value">⭐⭐⭐ 中高</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">🎯 核心协议</div>
+                    <div class="meta-value">10+个</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">💻 实践方式</div>
+                    <div class="meta-value">小额交易</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 核心概念 -->
+        <div class="content-section">
+            <h2>📌 DeFi核心概念速览</h2>
+            <p>DeFi（去中心化金融）是指完全由区块链驱动的金融服务，无需传统中介（银行、经纪商等）。用户直接通过智能合约相互交互，控制自己的资产。</p>
+            
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <h4>🏦 借贷协议</h4>
+                    <p>用户存入资产赚取利息，或者质押资产借出其他资产。利率由供需自动调整。代表：Aave、Compound。</p>
+                </div>
+                <div class="concept-card">
+                    <h4>🔄 去中心化交易所（DEX）</h4>
+                    <p>用户直接交换代币，无需中央订单簿。使用自动做市商（AMM）模式。代表：Uniswap、Curve。</p>
+                </div>
+                <div class="concept-card">
+                    <h4>💱 稳定币</h4>
+                    <p>价值与法币或其他资产挂钩的代币。1 USDC ≈ 1 美元。是DeFi中的"美元"。</p>
+                </div>
+                <div class="concept-card">
+                    <h4>⛓️ 衍生品</h4>
+                    <p>基于底层资产的杠杆交易。可以看涨或看跌。高风险但高收益。代表：dYdX、Hyperliquid。</p>
+                </div>
+                <div class="concept-card">
+                    <h4>🌾 流动性挖矿</h4>
+                    <p>提供交易对流动性，赚取交易费和协议激励代币。是快速增加资本收益的方式。</p>
+                </div>
+                <div class="concept-card">
+                    <h4>🪙 质押</h4>
+                    <p>锁定代币参与网络验证或治理，获得年化收益。是被动收入的主要方式。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第一部分：借贷协议 -->
+        <div class="content-section">
+            <h2>1️⃣ 借贷协议（Aave & Compound）</h2>
+            
+            <h3>借贷协议如何工作？</h3>
+            <p><strong>用户存入资产 → 获得利息收入 → 其他用户质押抵押品 → 借出资产</strong></p>
+            <p>利率由算法自动调整：当借款需求高时，利率上升；当供应过剩时，利率下降。这完全由代码控制，无人为干预。</p>
+
+            <h3>主流借贷协议对比</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>协议</th>
+                        <th>TVL</th>
+                        <th>核心特性</th>
+                        <th>优势</th>
+                        <th>链支持</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Aave</strong></td>
+                        <td>$4.5B+</td>
+                        <td>Flash Loans、变动/固定利率</td>
+                        <td>最大、最安全、生态最丰富</td>
+                        <td>Ethereum、Arbitrum、Polygon、Base</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compound</strong></td>
+                        <td>$2.8B+</td>
+                        <td>算法市场、治理代币COMP</td>
+                        <td>先驱者、稳定、学术背景强</td>
+                        <td>Ethereum、Polygon、Arbitrum</td>
+                    </tr>
+                    <tr>
+                        <td><strong>JustLend</strong></td>
+                        <td>$3.7B+</td>
+                        <td>多链部署、社区治理</td>
+                        <td>新兴强劲、TRON生态活跃</td>
+                        <td>Tron、Ethereum</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Morpho</strong></td>
+                        <td>$500M+</td>
+                        <td>点对点借贷、改进流动性</td>
+                        <td>资本效率更高、费用更低</td>
+                        <td>Ethereum、Base</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <strong>💡 Flash Loans（闪电贷）：</strong>Aave的创新功能。用户可以在一笔交易内借入任意金额资产，只要在交易结束前偿还并支付少量费用。无需抵押！这被用于套利、清算等高级策略。
+            </div>
+
+            <h3>借贷实际案例</h3>
+            <div class="case-study">
+                <div class="case-title">📊 存入100 USDC到Aave的收益</div>
+                <div class="case-row">
+                    <div class="case-item">
+                        <div class="case-label">存入金额</div>
+                        <div class="case-value">100 USDC</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">年化利率（APY）</div>
+                        <div class="case-value">8.5%</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">年收益</div>
+                        <div class="case-value">$8.50</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">月平均收益</div>
+                        <div class="case-value">$0.71</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 借贷风险：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li><strong>清算风险：</strong>如果抵押物价格下跌导致抵押率不足，资产会被强制清算</li>
+                    <li><strong>智能合约风险：</strong>协议漏洞可能导致资金损失</li>
+                    <li><strong>利率风险：</strong>利率可能突然下降，收益减少</li>
+                    <li><strong>推荐做法：</strong>始终保持150%以上的抵押率；使用大牌协议（Aave、Compound）</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 第二部分：DEX -->
+        <div class="content-section">
+            <h2>2️⃣ 去中心化交易所（DEX）与自动做市商</h2>
+            
+            <h3>DEX vs CEX（中心化交易所）</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>特性</th>
+                        <th>DEX（去中心化）</th>
+                        <th>CEX（中心化）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>资产控制</strong></td>
+                        <td>✅ 你掌控私钥</td>
+                        <td>❌ 交易所掌管</td>
+                    </tr>
+                    <tr>
+                        <td><strong>交易速度</strong></td>
+                        <td>📊 取决于网络</td>
+                        <td>⚡ 非常快</td>
+                    </tr>
+                    <tr>
+                        <td><strong>费用</strong></td>
+                        <td>💰 通常0.05%-0.30%</td>
+                        <td>💰 通常0.1%-0.25%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>隐私</strong></td>
+                        <td>🔐 无需KYC</td>
+                        <td>🔐 需要身份验证</td>
+                    </tr>
+                    <tr>
+                        <td><strong>安全性</strong></td>
+                        <td>取决于合约质量</td>
+                        <td>受监管机构保护</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>自动做市商（AMM）原理</h3>
+            <p>DEX不使用订单簿，而是使用智能合约管理的"流动性池"。任何人都可以成为做市商：</p>
+            <ul>
+                <li><strong>1. 流动性提供者（LP）</strong>存入相等价值的两种代币（如100 ETH + 150,000 USDC）</li>
+                <li><strong>2. 交易者</strong>与这个池子交换代币</li>
+                <li><strong>3. LP获得收益：</strong>赚取交易费（通常是交易额的0.05%-1%）</li>
+            </ul>
+
+            <h3>主流DEX对比</h3>
+            <div class="protocol-card">
+                <div class="protocol-name">🦄 Uniswap<span class="protocol-tvl">TVL $3.2B+</span></div>
+                <p><strong>最大的DEX。</strong>V3引入了"集中流动性"，让LP在特定价格范围内提供流动性，提高资本效率。</p>
+                <div class="protocol-features">
+                    <div class="feature-tag">📈 最高交易量</div>
+                    <div class="feature-tag">🔹 ERC-20支持</div>
+                    <div class="feature-tag">⚡ Layer 2完美支持</div>
+                    <div class="feature-tag">🎯 集中流动性V3</div>
+                </div>
+            </div>
+
+            <div class="protocol-card">
+                <div class="protocol-name">🌀 Curve<span class="protocol-tvl">TVL $2B+</span></div>
+                <p><strong>稳定币交易专家。</strong>针对稳定币对（如USDC-USDT）优化，滑点极低，费用最便宜。</p>
+                <div class="protocol-features">
+                    <div class="feature-tag">💱 稳定币交易</div>
+                    <div class="feature-tag">📉 滑点最低</div>
+                    <div class="feature-tag">💸 费用最便宜</div>
+                    <div class="feature-tag">🏦 LP收益稳定</div>
+                </div>
+            </div>
+
+            <div class="protocol-card">
+                <div class="protocol-name">🔄 Balancer<span class="protocol-tvl">TVL $800M+</span></div>
+                <p><strong>灵活的流动性池。</strong>支持2-8种资产的池子，让投资组合自动再平衡。</p>
+                <div class="protocol-features">
+                    <div class="feature-tag">⚖️ 多代币池</div>
+                    <div class="feature-tag">🔄 自动再平衡</div>
+                    <div class="feature-tag">📊 投资组合工具</div>
+                </div>
+            </div>
+
+            <h3>DEX实际案例：无常损失</h3>
+            <div class="case-study">
+                <div class="case-title">⚠️ 为什么提供流动性很复杂？</div>
+                <p style="margin-bottom: 12px;">假设你在Uniswap V2提供100 ETH + 150,000 USDC的流动性</p>
+                <div class="case-row">
+                    <div class="case-item">
+                        <div class="case-label">初始状态</div>
+                        <div class="case-value">ETH=$1,500</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">6个月后</div>
+                        <div class="case-value">ETH=$3,000</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">你的LP资产</div>
+                        <div class="case-value">70.7 ETH + 212,132 USDC</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">无常损失</div>
+                        <div class="case-value">-$50,000+</div>
+                    </div>
+                </div>
+                <p style="margin-top: 12px; font-size: 13px; color: #666;"><strong>解释：</strong>你失去了29.3个ETH，即使赚取了交易费，净亏损仍然很大。这就是"无常损失"。只有在价格回到初始水平，或交易费足够弥补时才能恢复。</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>✅ 如何避免无常损失：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>提供稳定币对流动性（USDC-USDT）- 风险最低</li>
+                    <li>使用Curve或Balancer - 更好的无常损失保护</li>
+                    <li>在Layer 2交易 - Gas费更低，交易费收益更高</li>
+                    <li>选择低波动资产对</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 第三部分：稳定币 -->
+        <div class="content-section">
+            <h2>3️⃣ 稳定币与链上支付</h2>
+            
+            <h3>稳定币的三种模式</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>类型</th>
+                        <th>保证方式</th>
+                        <th>代表项目</th>
+                        <th>风险</th>
+                        <th>优势</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>法币背书</strong></td>
+                        <td>1:1与美元挂钩，银行存款保证</td>
+                        <td>USDC、USDT</td>
+                        <td>发行人风险</td>
+                        <td>简单、广泛认可</td>
+                    </tr>
+                    <tr>
+                        <td><strong>超额抵押</strong></td>
+                        <td>质押加密资产（>150%超额）</td>
+                        <td>DAI（MakerDAO）</td>
+                        <td>抵押物价格风险</td>
+                        <td>完全去中心化、无审查</td>
+                    </tr>
+                    <tr>
+                        <td><strong>算法稳定</strong></td>
+                        <td>供应量自动调整维持价格</td>
+                        <td>（大多已失败）</td>
+                        <td>极高 - 历史失败多</td>
+                        <td>无需抵押品</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>主流稳定币对比</h3>
+            <div class="protocol-card">
+                <div class="protocol-name">💵 USDC<span class="protocol-tvl">流通量 $30B+</span></div>
+                <p>由Circle和Coinbase联合发行。完全透明，每个USDC都由银行存款1:1支撑。受SEC监管。</p>
+                <div class="protocol-features">
+                    <div class="feature-tag">✅ 最安全</div>
+                    <div class="feature-tag">📋 受监管</div>
+                    <div class="feature-tag">⚡ 所有链支持</div>
+                    <div class="feature-tag">🏛️ 机构认可</div>
+                </div>
+            </div>
+
+            <div class="protocol-card">
+                <div class="protocol-name">💬 USDT<span class="protocol-tvl">流通量 $130B+</span></div>
+                <p>最老的稳定币，由Tether发行。流动性最强，但因不透明而受质疑。大多交易所支持。</p>
+                <div class="protocol-features">
+                    <div class="feature-tag">💎 流动性最强</div>
+                    <div class="feature-tag">📊 交易对最多</div>
+                    <div class="feature-tag">⚠️ 透明度存疑</div>
+                    <div class="feature-tag">🌍 全球使用</div>
+                </div>
+            </div>
+
+            <div class="protocol-card">
+                <div class="protocol-name">🅱️ DAI<span class="protocol-tvl">流通量 $5B+</span></div>
+                <p>MakerDAO的去中心化稳定币。由加密资产超额抵押生成。完全透明、无审查。对开发者友好。</p>
+                <div class="protocol-features">
+                    <div class="feature-tag">🔓 完全去中心化</div>
+                    <div class="feature-tag">🛡️ 无审查风险</div>
+                    <div class="feature-tag">📜 透明可审计</div>
+                    <div class="feature-tag">🏗️ 开发者友好</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第四部分：收益策略 -->
+        <div class="content-section">
+            <h2>4️⃣ 收益策略（质押 vs 流动性挖矿）</h2>
+            
+            <h3>质押（Staking）：被动收入</h3>
+            <p>将代币锁定在协议中参与验证或治理，获得年化收益。是最稳定的DeFi收入方式。</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>质押方式</th>
+                        <th>年化收益（APY）</th>
+                        <th>锁定期</th>
+                        <th>风险</th>
+                        <th>最小金额</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ethereum 2.0验证器</strong></td>
+                        <td>4.5%-6.2%</td>
+                        <td>无</td>
+                        <td>低 - 可随时取消</td>
+                        <td>32 ETH ($128K+)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lido（ETH Staking）</strong></td>
+                        <td>4.2%-6%</td>
+                        <td>无</td>
+                        <td>低 - 流动性强</td>
+                        <td>0.001 ETH</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Solana质押</strong></td>
+                        <td>8%-12%</td>
+                        <td>无</td>
+                        <td>中 - 链风险</td>
+                        <td>0.01 SOL</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Polygon质押</strong></td>
+                        <td>5%-15%</td>
+                        <td>21天</td>
+                        <td>中 - Sidechain</td>
+                        <td>1 MATIC</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="case-study">
+                <div class="case-title">📊 质押收益计算</div>
+                <p style="margin-bottom: 12px;">质押10 ETH在Lido的6个月收益</p>
+                <div class="case-row">
+                    <div class="case-item">
+                        <div class="case-label">初始本金</div>
+                        <div class="case-value">10 ETH</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">年化收益率（APY）</div>
+                        <div class="case-value">5.5%</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">6个月收益</div>
+                        <div class="case-value">0.275 ETH</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">无风险收益</div>
+                        <div class="case-value">✅ 自动复利</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>流动性挖矿：主动收入</h3>
+            <p>比质押收益更高，但需要主动管理和承受更多风险。</p>
+            
+            <div class="case-study">
+                <div class="case-title">📊 流动性挖矿收益计算</div>
+                <p style="margin-bottom: 12px;">在Curve提供100 USDC-USDT流动性</p>
+                <div class="case-row">
+                    <div class="case-item">
+                        <div class="case-label">提供金额</div>
+                        <div class="case-value">100 USDC + 100 USDT</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">交易费APY</div>
+                        <div class="case-value">15%-25%</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">激励代币APY</div>
+                        <div class="case-value">50%+</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">总APY</div>
+                        <div class="case-value">65%-75%+</div>
+                    </div>
+                </div>
+                <p style="margin-top: 12px; font-size: 13px; color: #666;"><strong>但要注意：</strong>激励代币可能大幅下跌；需要定期复利以支付Gas费；无常损失可能抵消收益。</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>✅ 收益策略选择指南：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li><strong>求稳定？</strong> 选择质押 - 4-6% APY，风险低，复利自动</li>
+                    <li><strong>求高收益？</strong> 选择稳定币流动性挖矿 - 15-25% APY，无常损失最小</li>
+                    <li><strong>能主动管理？</strong> 选择多策略组合 - 80% 质押 + 20% 高收益挖矿</li>
+                    <li><strong>新手建议：</strong> 先从Lido质押开始，学会后再尝试DEX流动性</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 第五部分：衍生品与杠杆 -->
+        <div class="content-section">
+            <h2>5️⃣ 衍生品与杠杆交易（高风险高收益）</h2>
+            
+            <h3>什么是DeFi衍生品？</h3>
+            <p>允许用户进行杠杆交易，即用1美元的本金交易10美元的资产（10倍杠杆）。可以看涨也可以看跌。</p>
+
+            <h3>主流衍生品平台</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>平台</th>
+                        <th>支持杠杆</th>
+                        <th>交易对</th>
+                        <th>适合人群</th>
+                        <th>风险等级</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>dYdX v4</strong></td>
+                        <td>最高20倍</td>
+                        <td>50+种资产</td>
+                        <td>专业交易者</td>
+                        <td>⚠️ 极高</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hyperliquid</strong></td>
+                        <td>最高50倍</td>
+                        <td>期货合约</td>
+                        <td>期货交易者</td>
+                        <td>⚠️⚠️⚠️ 极高</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GMX</strong></td>
+                        <td>最高50倍</td>
+                        <td>30+交易对</td>
+                        <td>链上交易者</td>
+                        <td>⚠️⚠️⚠️ 极高</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aave Flash Loans</strong></td>
+                        <td>无限</td>
+                        <td>任何ERC-20</td>
+                        <td>开发者/套利者</td>
+                        <td>⚠️ 中高</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box">
+                <strong>⚠️ 衍生品风险警告（非常重要）：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li><strong>爆仓风险：</strong>价格快速变动导致你的保证金不足，头寸被强制平仓。你可能亏损100%甚至更多</li>
+                    <li><strong>高频波动：</strong>加密市场24/7波动，一觉醒来资金可能已消失</li>
+                    <li><strong>滑点风险：</strong>实际成交价可能远低于预期价格</li>
+                    <li><strong>闪崩风险：</strong>单一事件导致极端价格波动</li>
+                    <li><strong>新手禁令：</strong>如果还不能100%理解，就不要碰杠杆</li>
+                </ul>
+            </div>
+
+            <div class="case-study">
+                <div class="case-title">📉 杠杆交易爆仓示例</div>
+                <p style="margin-bottom: 12px;">初始资金$1,000，5倍杠杆做多ETH（假设ETH=$4,000）</p>
+                <div class="case-row">
+                    <div class="case-item">
+                        <div class="case-label">你的保证金</div>
+                        <div class="case-value">$1,000</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">交易金额</div>
+                        <div class="case-value">$5,000</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">假设ETH跌至$3,800</div>
+                        <div class="case-value">亏损$1,000</div>
+                    </div>
+                    <div class="case-item">
+                        <div class="case-label">结果</div>
+                        <div class="case-value">爆仓！资金清零</div>
+                    </div>
+                </div>
+                <p style="margin-top: 12px; font-size: 13px; color: #666;"><strong>只需5%的价格下跌就能亏损100%！</strong></p>
+            </div>
+        </div>
+
+        <!-- 第六部分：智能合约风险 -->
+        <div class="content-section">
+            <h2>6️⃣ DeFi风险与安全指南</h2>
+            
+            <h3>三种风险分类</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>风险类型</th>
+                        <th>描述</th>
+                        <th>如何缓解</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>智能合约风险</strong></td>
+                        <td>代码漏洞导致资金被盗或卡死</td>
+                        <td>选择经过审计的协议、规模大的平台</td>
+                    </tr>
+                    <tr>
+                        <td><strong>市场风险</strong></td>
+                        <td>价格暴涨暴跌、清算、无常损失</td>
+                        <td>做好头寸管理、分散投资、别用杠杆</td>
+                    </tr>
+                    <tr>
+                        <td><strong>运营风险</strong></td>
+                        <td>私钥泄露、钱包被黑、交易被截获</td>
+                        <td>使用硬件钱包、避免公开WiFi、验证地址</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>DeFi安全最佳实践</h3>
+            <div class="highlight-box">
+                <strong>✅ 必做事项：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>✅ 只在知名协议使用（Aave、Uniswap、Curve等top 10）</li>
+                    <li>✅ 先在测试网或Layer 2小额测试</li>
+                    <li>✅ 启用"签名确认"功能查看交易细节</li>
+                    <li>✅ 小额多次而非一次性投入</li>
+                    <li>✅ 定期提取收益而非堆积</li>
+                    <li>✅ 使用硬件钱包管理大额资金</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 检查清单 -->
+        <div class="content-section">
+            <h2>✅ 第二层学习检查清单</h2>
+            <p style="margin-bottom: 20px; color: #666;">在继续第三层之前，确保你已经掌握和实践这些内容：</p>
+            
+            <div class="checklist">
+                <h4>🔹 理论知识</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">理解DeFi的基本概念和优势（无中介、自托管、24/7）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">掌握Aave和Compound的借贷机制</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">理解自动做市商（AMM）和流动性池的原理</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">知道什么是无常损失（Impermanent Loss）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">掌握三种稳定币模式的区别</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">理解质押和流动性挖矿的收益差异</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">明白杠杆交易的爆仓风险（重点！）</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>💻 实践操作</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">在Aave上用$10进行一笔借贷操作（测试网）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9">在Uniswap上进行一笔代币交换</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10">在Lido上质押最小量的ETH，观察收益</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check11">
+                    <label for="check11">在Curve上提供稳定币对流动性（最安全的选择）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check12">
+                    <label for="check12">用Etherscan查看一个Aave Flash Loan交易</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check13">
+                    <label for="check13">在DeFiLlama上查看各协议的TVL排名</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check14">
+                    <label for="check14">计算自己的收益：了解APY、APR、复利的关系</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check15">
+                    <label for="check15">承诺：绝对不用杠杆，直到完全理解风险</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 推荐大V账号 -->
+        <div class="influencers-section">
+            <h2>⭐ DeFi领域推荐的业界大V（粉丝100K+）</h2>
+            <p style="color: #666; margin-bottom: 30px;">这些大V专门分析DeFi协议、收益策略和市场趋势。关注他们了解最新DeFi动态。</p>
+
+            <!-- Twitter/X 大V -->
+            <div class="platform-group">
+                <h3>🐦 Twitter/X DeFi专家</h3>
+                <div class="influencers-grid">
+                    <!-- Uniswap Official -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">UNI</div>
+                        <div class="influencer-info">
+                            <h4>Uniswap</h4>
+                            <div class="influencer-handle">@Uniswap</div>
+                            <div class="influencer-followers">🔵 832K 粉丝</div>
+                            <span class="influencer-tag">官方账号</span>
+                        </div>
+                    </div>
+
+                    <!-- Aave Official -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">AAVE</div>
+                        <div class="influencer-info">
+                            <h4>Aave Protocol</h4>
+                            <div class="influencer-handle">@AaveAave</div>
+                            <div class="influencer-followers">🔵 615K 粉丝</div>
+                            <span class="influencer-tag">官方账号</span>
+                        </div>
+                    </div>
+
+                    <!-- Curve Official -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">CRV</div>
+                        <div class="influencer-info">
+                            <h4>Curve Finance</h4>
+                            <div class="influencer-handle">@CurveFinance</div>
+                            <div class="influencer-followers">🔵 392K 粉丝</div>
+                            <span class="influencer-tag">官方账号</span>
+                        </div>
+                    </div>
+
+                    <!-- 0xfoobar -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">0x</div>
+                        <div class="influencer-info">
+                            <h4>0xfoobar</h4>
+                            <div class="influencer-handle">@0xfoobar</div>
+                            <div class="influencer-followers">🔵 188K 粉丝</div>
+                            <span class="influencer-tag">DeFi分析师</span>
+                        </div>
+                    </div>
+
+                    <!-- Lido Official -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">LD</div>
+                        <div class="influencer-info">
+                            <h4>Lido</h4>
+                            <div class="influencer-handle">@LidoFinance</div>
+                            <div class="influencer-followers">🔵 314K 粉丝</div>
+                            <span class="influencer-tag">质押协议</span>
+                        </div>
+                    </div>
+
+                    <!-- Bankless -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">BK</div>
+                        <div class="influencer-info">
+                            <h4>Bankless</h4>
+                            <div class="influencer-handle">@BanklessHQ</div>
+                            <div class="influencer-followers">🔵 621K 粉丝</div>
+                            <span class="influencer-tag">DeFi媒体</span>
+                        </div>
+                    </div>
+
+                    <!-- DeFi Dad -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">DD</div>
+                        <div class="influencer-info">
+                            <h4>DeFi Dad</h4>
+                            <div class="influencer-handle">@DefiDad</div>
+                            <div class="influencer-followers">🔵 151K 粉丝</div>
+                            <span class="influencer-tag">教育家</span>
+                        </div>
+                    </div>
+
+                    <!-- Yearn Official -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">YFI</div>
+                        <div class="influencer-info">
+                            <h4>Yearn Finance</h4>
+                            <div class="influencer-handle">@iearnfinance</div>
+                            <div class="influencer-followers">🔵 256K 粉丝</div>
+                            <span class="influencer-tag">策略聚合</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YouTube 大V -->
+            <div class="platform-group">
+                <h3>▶️ YouTube DeFi频道</h3>
+                <div class="influencers-grid">
+                    <!-- Coin Bureau -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">CB</div>
+                        <div class="influencer-info">
+                            <h4>Coin Bureau</h4>
+                            <div class="influencer-handle">Guy Turner</div>
+                            <div class="influencer-followers">📺 892K 订阅</div>
+                            <span class="influencer-tag">深度分析</span>
+                        </div>
+                    </div>
+
+                    <!-- DeFi Dad YouTube -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">DD</div>
+                        <div class="influencer-info">
+                            <h4>DeFi Dad</h4>
+                            <div class="influencer-handle">DeFi Dad</div>
+                            <div class="influencer-followers">📺 284K 订阅</div>
+                            <span class="influencer-tag">教程详解</span>
+                        </div>
+                    </div>
+
+                    <!-- Whiteboard Crypto -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">WBC</div>
+                        <div class="influencer-info">
+                            <h4>Whiteboard Crypto</h4>
+                            <div class="influencer-handle">Blockchain Council</div>
+                            <div class="influencer-followers">📺 578K 订阅</div>
+                            <span class="influencer-tag">概念讲解</span>
+                        </div>
+                    </div>
+
+                    <!-- Crypto Tips YouTube -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">CT</div>
+                        <div class="influencer-info">
+                            <h4>Crypto Tips</h4>
+                            <div class="influencer-handle">Crypto Tips</div>
+                            <div class="influencer-followers">📺 215K+ 订阅</div>
+                            <span class="influencer-tag">初学友好</span>
+                        </div>
+                    </div>
+
+                    <!-- 99Bitcoins -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">99B</div>
+                        <div class="influencer-info">
+                            <h4>99Bitcoins</h4>
+                            <div class="influencer-handle">99Bitcoins</div>
+                            <div class="influencer-followers">📺 614K 订阅</div>
+                            <span class="influencer-tag">全面教程</span>
+                        </div>
+                    </div>
+
+                    <!-- Finematics -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">FM</div>
+                        <div class="influencer-info">
+                            <h4>Finematics</h4>
+                            <div class="influencer-handle">Finematics</div>
+                            <div class="influencer-followers">📺 387K 订阅</div>
+                            <span class="influencer-tag">DeFi专家</span>
+                        </div>
+                    </div>
+
+                    <!-- Box Mining -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">BM</div>
+                        <div class="influencer-info">
+                            <h4>Box Mining</h4>
+                            <div class="influencer-handle">Box Mining</div>
+                            <div class="influencer-followers">📺 325K 订阅</div>
+                            <span class="influencer-tag">策略分析</span>
+                        </div>
+                    </div>
+
+                    <!-- 加密蜘蛛 -->
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">CX</div>
+                        <div class="influencer-info">
+                            <h4>加密蜘蛛</h4>
+                            <div class="influencer-handle">加密蜘蛛</div>
+                            <div class="influencer-followers">📺 245K+ 订阅</div>
+                            <span class="influencer-tag">中文讲解</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>💡 选择关注的DeFi创作者建议：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>优先关注协议官方账号（Aave、Uniswap、Curve）- 获得第一手信息</li>
+                    <li>关注DeFi分析师（0xfoobar等）- 获得深度协议分析</li>
+                    <li>关注Bankless这样的专业媒体 - 获得平衡的观点</li>
+                    <li>警惕"收益担保"和"必然暴涨"的声称 - 这些都是诈骗信号</li>
+                    <li>好的内容应该包含风险警告和多角度分析</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div class="footer-nav">
+            <button class="btn-secondary" onclick="window.location.href='web1.html'">⬅️ 返回第一层</button>
+            <button class="btn-secondary" onclick="window.location.href='home.html'">⬅️ 返回主页</button>
+            <button class="btn-primary" onclick="window.location.href='web3.html'">➡️ 前往第三层</button>
+        </div>
+    </div>
+
+    <script>
+        // 检查清单功能
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(this.id, this.checked);
+            });
+            // 恢复之前的状态
+            this.checked = localStorage.getItem(checkbox.id) === 'true';
+        });
+
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            const sections = document.querySelectorAll('.content-section, .influencers-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // 大V卡片点击
+        document.querySelectorAll('.influencer-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const handle = this.querySelector('.influencer-handle').textContent;
+                alert(`正在跳转到 ${handle}...\n\n实际应用中会跳转到对应的Twitter或YouTube频道。`);
+            });
+        });
+    </script>
+</body>
+</html>

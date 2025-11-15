@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 SOP 第六层 - 开发工具与基础设施完全指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 导航栏 */
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* 头部 */
+        header {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            border-left: 6px solid #667eea;
+        }
+
+        header h1 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .header-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .meta-label {
+            font-size: 13px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .meta-value {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        /* 内容区域 */
+        .content-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content-section h3 {
+            font-size: 22px;
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .content-section h4 {
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-section ul, .content-section ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .content-section li {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        /* 表格 */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(102, 126, 234, 0.03);
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 代码块 */
+        .code-box {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .code-title {
+            font-size: 14px;
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* 盒子 */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box strong {
+            color: #667eea;
+        }
+
+        .warning-box {
+            background: white;
+            border-left: 6px solid #FFC107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .warning-box strong {
+            color: #FF9800;
+        }
+
+        /* 检查清单 */
+        .checklist {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .checklist h4 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .checklist-item label {
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        /* 推荐大V部分 */
+        .influencers-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .influencers-section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .platform-group {
+            margin-bottom: 40px;
+        }
+
+        .platform-group h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .influencers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .influencer-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .influencer-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .influencer-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .influencer-info h4 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .influencer-handle {
+            font-size: 12px;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .influencer-followers {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .influencer-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* 底部导航 */
+        .footer-nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a, .footer-nav button {
+            padding: 14px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-nav .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .footer-nav .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer-nav .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .footer-nav .btn-secondary:hover {
+            background: #f8f9ff;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .comparison-table {
+                font-size: 12px;
+            }
+
+            .comparison-table th, .comparison-table td {
+                padding: 12px;
+            }
+
+            .influencers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .content-section {
+                padding: 15px;
+            }
+
+            .influencers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-nav {
+                flex-direction: column;
+            }
+
+            .footer-nav a, .footer-nav button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <a href="web3_sop_index_v4.html">🏠 主页</a> / 
+            <a href="web3_sop_layer5.html">第五层</a> / 
+            <span style="color: #667eea; font-weight: 700;">第六层 - 开发工具与基础设施</span>
+        </div>
+
+        <!-- 头部 -->
+        <header>
+            <h1>⚙️ 第六层：开发工具与基础设施完全指南</h1>
+            <p style="font-size: 16px; color: #666; margin-top: 10px;">掌握Web3开发的技术工具栈 - Solidity、开发框架、节点基础设施、详细代码示例和安全最佳实践</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <div class="meta-label">⏱️ 学习周期</div>
+                    <div class="meta-value">2-4周</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">📊 难度等级</div>
+                    <div class="meta-value">⭐⭐⭐⭐ 高</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">🎯 代码示例</div>
+                    <div class="meta-value">20+</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">💻 编程语言</div>
+                    <div class="meta-value">Solidity</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 第一部分：Solidity语言详解 -->
+        <div class="content-section">
+            <h2>1️⃣ Solidity编程语言与2025路线图</h2>
+            
+            <h3>Solidity的历史与现状</h3>
+            <p><strong>Solidity在2025年迎来第10个生日</strong>。从一个简单的合约语言，发展成为管理数十亿美元资产的复杂系统。2025年的重大进展包括向"Core Solidity"演进，最终成为Solidity 1.0。</p>
+
+            <h3>Solidity 2025年路线图详解</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>季度</th>
+                        <th>重点工作</th>
+                        <th>用户影响</th>
+                        <th>关键变更</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Q1-Q3</strong></td>
+                        <td>稳定化和优化</td>
+                        <td>改进编译速度、安全性</td>
+                        <td>ARM Linux二进制、源代码验证改进</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Q4</strong></td>
+                        <td>Core Solidity原型</td>
+                        <td>支持ERC20功能、SSA CFG优化</td>
+                        <td>更快编译、更好错误消息、ethdebug</td>
+                    </tr>
+                    <tr>
+                        <td><strong>0.9.0版本</strong></td>
+                        <td>Breaking changes准备</td>
+                        <td>为Solidity 1.0做准备</td>
+                        <td>特性弃用通知</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Solidity基础概念详解</h3>
+            <p>Solidity的核心特性决定了智能合约的功能和安全性。理解这些概念对编写安全的合约至关重要。</p>
+
+            <h4>状态变量（State Variables）</h4>
+            <p>状态变量存储在区块链永久存储中，修改它们的操作会消耗Gas。有三种可见性：<strong>public（任何人可读）、internal（仅合约和继承者）、private（仅合约）</strong>。</p>
+
+            <h4>函数类型详解</h4>
+            <ul>
+                <li><strong>public函数：</strong> 任何人都可以调用，会消耗Gas，可以修改状态</li>
+                <li><strong>external函数：</strong> 只能从外部调用（比internal稍便宜），不能内部调用</li>
+                <li><strong>internal函数：</strong> 只能从合约内部或继承合约调用，不消耗Gas</li>
+                <li><strong>private函数：</strong> 仅合约内部可调用，不能被继承</li>
+                <li><strong>view函数：</strong> 只读，不修改状态，不消耗Gas</li>
+                <li><strong>pure函数：</strong> 不读取状态，不修改状态，最便宜的操作</li>
+            </ul>
+
+            <h3>完整的ERC-20代币合约示例</h3>
+            <div class="code-box">
+                <div class="code-title">
+                    <span class="code-label">SOLIDITY</span>
+                    SimpleToken.sol - 完整的ERC-20实现
+                </div>
+                <pre>pragma solidity ^0.8.20;
+
+// ============================================
+// SimpleToken - 完整的ERC-20实现
+// ============================================
+
+contract SimpleToken {
+    // ========== 状态变量 ==========
+    string public constant name = "Simple Token";
+    string public constant symbol = "SIMPLE";
+    uint8 public constant decimals = 18;
+    uint256 public totalSupply;
+    
+    address public owner;
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+    
+    // ========== 事件 ==========
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
+    
+    // ========== 修饰符 ==========
+    modifier onlyOwner() {
+        require(msg.sender == owner, "仅所有者可调用");
+        _;
+    }
+    
+    // ========== 构造函数 ==========
+    constructor(uint256 initialSupply) {
+        owner = msg.sender;
+        totalSupply = initialSupply * 10 ** uint256(decimals);
+        balanceOf[msg.sender] = totalSupply;
+    }
+    
+    // ========== 核心ERC-20函数 ==========
+    
+    function transfer(address to, uint256 amount) public returns (bool) {
+        require(to != address(0), "不能转移到零地址");
+        require(balanceOf[msg.sender] >= amount, "余额不足");
+        
+        balanceOf[msg.sender] -= amount;
+        balanceOf[to] += amount;
+        emit Transfer(msg.sender, to, amount);
+        return true;
+    }
+    
+    function approve(address spender, uint256 amount) public returns (bool) {
+        allowance[msg.sender][spender] = amount;
+        emit Approval(msg.sender, spender, amount);
+        return true;
+    }
+    
+    function transferFrom(address from, address to, uint256 amount) public returns (bool) {
+        require(from != address(0), "不能从零地址转移");
+        require(to != address(0), "不能转移到零地址");
+        require(balanceOf[from] >= amount, "余额不足");
+        require(allowance[from][msg.sender] >= amount, "授权额度不足");
+        
+        balanceOf[from] -= amount;
+        balanceOf[to] += amount;
+        allowance[from][msg.sender] -= amount;
+        
+        emit Transfer(from, to, amount);
+        return true;
+    }
+    
+    // ========== 额外功能 ==========
+    
+    function mint(address to, uint256 amount) public onlyOwner {
+        require(to != address(0), "不能铸造到零地址");
+        balanceOf[to] += amount;
+        totalSupply += amount;
+        emit Transfer(address(0), to, amount);
+    }
+    
+    function burn(uint256 amount) public {
+        require(balanceOf[msg.sender] >= amount, "余额不足");
+        balanceOf[msg.sender] -= amount;
+        totalSupply -= amount;
+        emit Transfer(msg.sender, address(0), amount);
+    }
+}</pre>
+            </div>
+
+            <h3>代码详细讲解</h3>
+            <p><strong>构造函数：</strong> 合约部署时执行一次。这里我们初始化代币供应量和所有者。注意乘以<code>10 ** 18</code>是因为Solidity不支持小数，使用整数表示（18位小数位是以太坊标准）。</p>
+            <p><strong>transfer函数：</strong> 最常用的函数。按照CEI模式（Checks-Effects-Interactions）：先检查条件，再修改状态，最后发出事件。</p>
+            <p><strong>approve和transferFrom：</strong> 这对函数实现了"授权-转移"模式。用户先授权DEX某个额度，DEX再调用transferFrom转移。这是DeFi的核心机制。</p>
+            <p><strong>修饰符（Modifier）：</strong> onlyOwner确保只有所有者可以调用mint函数。避免任意人铸造代币。</p>
+        </div>
+
+        <!-- 第二部分：安全模式 -->
+        <div class="content-section">
+            <h2>2️⃣ 智能合约安全模式详解</h2>
+            
+            <h3>CEI模式（Checks-Effects-Interactions）</h3>
+            <p>这是防止重入攻击的最重要模式。顺序很关键：<strong>先检查（Checks）</strong>→<strong>修改状态（Effects）</strong>→<strong>外部调用（Interactions）</strong>。如果反过来做，在外部调用的回调中可能被重新调用。</p>
+
+            <div class="code-box">
+                <div class="code-title">
+                    <span class="code-label">SOLIDITY</span>
+                    CEI模式示例 - 银行取款函数
+                </div>
+                <pre>pragma solidity ^0.8.20;
+
+contract SafeBank {
+    mapping(address => uint256) public balances;
+    
+    // ❌ 错误示例 - 先转账后更新余额
+    function withdraw_unsafe(uint256 amount) public {
+        (bool success, ) = msg.sender.call{value: amount}("");
+        require(success, "转账失败");
+        balances[msg.sender] -= amount;  // 太晚了！
+    }
+    
+    // ✅ 正确示例 - 遵循CEI模式
+    function withdraw_safe(uint256 amount) public {
+        // 1. Checks - 检查前置条件
+        require(amount > 0, "提款金额必须大于0");
+        require(balances[msg.sender] >= amount, "余额不足");
+        
+        // 2. Effects - 修改状态
+        balances[msg.sender] -= amount;
+        
+        // 3. Interactions - 执行外部调用
+        (bool success, ) = msg.sender.call{value: amount}("");
+        require(success, "转账失败");
+    }
+}</pre>
+            </div>
+
+            <h3>防重入保护详解</h3>
+            <p>重入攻击是智能合约最危险的攻击方式。攻击者在转账的回调函数中再次调用withdraw，导致多次提取资金。有两种防护方式：</p>
+
+            <div class="highlight-box">
+                <strong>方式1：CEI模式</strong>
+                <p style="margin-top: 10px;">按照上面的CEI顺序做。在最后调用外部函数前，已经修改了余额，即使被重入也不会产生问题。</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>方式2：Mutex锁（ReentrancyGuard）</strong>
+                <p style="margin-top: 10px;">使用一个布尔锁标志。函数开始时加锁，结束时解锁。中间任何重入调用都会因为锁而失败。</p>
+            </div>
+
+            <div class="code-box">
+                <div class="code-title">
+                    <span class="code-label">SOLIDITY</span>
+                    ReentrancyGuard - 重入保护
+                </div>
+                <pre>pragma solidity ^0.8.20;
+
+contract ReentrancyGuard {
+    uint256 private locked = 0;  // 0=未锁，1=已锁
+    
+    modifier nonReentrant() {
+        require(locked == 0, "重入保护：禁止重入");
+        locked = 1;
+        _;
+        locked = 0;
+    }
+}
+
+contract SafeBankWithGuard is ReentrancyGuard {
+    mapping(address => uint256) public balances;
+    
+    function withdraw(uint256 amount) public nonReentrant {
+        require(balances[msg.sender] >= amount, "余额不足");
+        
+        balances[msg.sender] -= amount;
+        
+        (bool success, ) = msg.sender.call{value: amount}("");
+        require(success, "转账失败");
+    }
+}</pre>
+            </div>
+
+            <h3>Emergency Stop模式</h3>
+            <p>在发现漏洞或遭受攻击时，可以快速暂停合约所有操作。这给了开发者应急时间来修复问题。</p>
+
+            <div class="code-box">
+                <div class="code-title">
+                    <span class="code-label">SOLIDITY</span>
+                    Emergency Stop模式
+                </div>
+                <pre>pragma solidity ^0.8.20;
+
+contract WithEmergencyStop {
+    bool public paused = false;
+    address public owner;
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "仅所有者");
+        _;
+    }
+    
+    modifier whenNotPaused() {
+        require(!paused, "合约已暂停");
+        _;
+    }
+    
+    function pause() public onlyOwner {
+        paused = true;
+    }
+    
+    function unpause() public onlyOwner {
+        paused = false;
+    }
+    
+    function withdraw(uint256 amount) public whenNotPaused {
+        // 即使合约被暂停，也不能提款
+    }
+}</pre>
+            </div>
+        </div>
+
+        <!-- 第三部分：开发框架 -->
+        <div class="content-section">
+            <h2>3️⃣ 开发框架：Hardhat vs Foundry深度对比</h2>
+            
+            <h3>为什么需要开发框架？</h3>
+            <p>直接用Solidity编译器太原始。开发框架提供了完整的开发环境：编译、测试、部署、调试等工具。选择合适的框架能大幅提高开发效率。</p>
+
+            <h3>Hardhat详细介绍</h3>
+            <p><strong>Hardhat是最流行的以太坊开发框架</strong>。基于JavaScript/TypeScript，拥有最丰富的插件生态。如果你不知道选哪个，就选Hardhat。</p>
+
+            <h4>Hardhat的关键特性：</h4>
+            <ul>
+                <li><strong>本地测试网络：</strong> Hardhat Network在内存中运行，速度快，可以自由控制区块链状态（时间、账户等）</li>
+                <li><strong>强大的调试工具：</strong> 详细的错误堆栈跟踪、断点调试、Gas分析</li>
+                <li><strong>丰富的插件生态：</strong> 50+官方和社区插件，扩展功能无限</li>
+                <li><strong>完整的框架：</strong> 内置编译、测试、部署所有功能，开箱即用</li>
+            </ul>
+
+            <h3>Foundry详细介绍</h3>
+            <p><strong>Foundry是新兴的高性能框架，用Rust实现</strong>。编译和测试速度比Hardhat快5-10倍，但生态还不如Hardhat成熟。</p>
+
+            <h4>Foundry的关键特性：</h4>
+            <ul>
+                <li><strong>极速编译：</strong> Rust实现，比Solidity编译器快很多</li>
+                <li><strong>Solidity优先：</strong> 用Solidity写测试，不需要学JavaScript</li>
+                <li><strong>内置Fuzz测试：</strong> 自动生成随机输入找到边界情况</li>
+                <li><strong>Cheatcodes：</strong> 特殊函数控制区块链状态（时间、账户余额等）</li>
+            </ul>
+
+            <h3>完整的对比表</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>方面</th>
+                        <th>Hardhat</th>
+                        <th>Foundry</th>
+                        <th>推荐</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>编译速度</strong></td>
+                        <td>中等（5-10秒）</td>
+                        <td>⚡ 极快（<1秒）</td>
+                        <td>时间敏感用Foundry</td>
+                    </tr>
+                    <tr>
+                        <td><strong>测试语言</strong></td>
+                        <td>JavaScript/TypeScript</td>
+                        <td>Solidity</td>
+                        <td>前端开发者用Hardhat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>学习曲线</strong></td>
+                        <td>平缓（用JavaScript）</td>
+                        <td>陡峭（Solidity+Rust）</td>
+                        <td>初学者用Hardhat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>插件生态</strong></td>
+                        <td>⭐⭐⭐⭐⭐ 极丰富</td>
+                        <td>⭐⭐ 正在增长</td>
+                        <td>需要扩展用Hardhat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>调试能力</strong></td>
+                        <td>⭐⭐⭐⭐⭐ 很强</td>
+                        <td>⭐⭐ 基础</td>
+                        <td>复杂调试用Hardhat</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fuzz测试</strong></td>
+                        <td>需要插件</td>
+                        <td>⭐⭐⭐⭐⭐ 内置</td>
+                        <td>要做Fuzz用Foundry</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2025推荐</strong></td>
+                        <td>生产项目首选</td>
+                        <td>高性能项目首选</td>
+                        <td>同时学两个最好</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <strong>💡 如何选择：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>🟦 <strong>选Hardhat如果：</strong> 你想要最安全的选择、需要完整生态、项目很复杂、需要与前端集成</li>
+                    <li>🔥 <strong>选Foundry如果：</strong> 你追求速度、喜欢Solidity、项目相对简单、想用最新技术</li>
+                    <li>🔄 <strong>最佳实践：</strong> 高阶开发者通常两个都用。用Hardhat做主开发，用Foundry做Fuzz测试</li>
+                </ul>
+            </div>
+
+            <h3>Hardhat项目结构示例</h3>
+            <div class="code-box">
+                <div class="code-title">
+                    <span class="code-label">文件结构</span>
+                    标准Hardhat项目布局
+                </div>
+                <pre>my-web3-project/
+├── contracts/              # 智能合约源代码
+│   ├── Token.sol
+│   └── Bank.sol
+├── test/                   # 单元测试（JavaScript）
+│   ├── Token.test.js
+│   └── Bank.test.js
+├── scripts/                # 部署脚本
+│   ├── deploy.js
+│   └── verify.js
+├── hardhat.config.js       # Hardhat配置
+├── .env                    # 环境变量（私钥、RPC端点）
+├── .env.example            # 示例环境变量
+└── package.json            # 项目依赖</pre>
+            </div>
+
+            <h3>Hardhat测试示例</h3>
+            <div class="code-box">
+                <div class="code-title">
+                    <span class="code-label">JAVASCRIPT</span>
+                    Token.test.js - Hardhat单元测试示例
+                </div>
+                <pre>const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+describe("SimpleToken", function () {
+  let token;
+  let owner, addr1, addr2;
+  const INITIAL_SUPPLY = ethers.parseEther("1000000");
+  
+  beforeEach(async function () {
+    [owner, addr1, addr2] = await ethers.getSigners();
+    const Token = await ethers.getContractFactory("SimpleToken");
+    token = await Token.deploy(INITIAL_SUPPLY);
+  });
+  
+  // 基础功能测试
+  it("应该有正确的总供应量", async function () {
+    expect(await token.totalSupply()).to.equal(INITIAL_SUPPLY);
+  });
+  
+  // 转移测试
+  it("应该转移正确数量的代币", async function () {
+    const transferAmount = ethers.parseEther("100");
+    await token.transfer(addr1.address, transferAmount);
+    expect(await token.balanceOf(addr1.address)).to.equal(transferAmount);
+  });
+  
+  // 事件测试
+  it("应该发出Transfer事件", async function () {
+    const transferAmount = ethers.parseEther("100");
+    await expect(token.transfer(addr1.address, transferAmount))
+      .to.emit(token, "Transfer")
+      .withArgs(owner.address, addr1.address, transferAmount);
+  });
+  
+  // 错误处理测试
+  it("应该在余额不足时失败", async function () {
+    const tooMuch = INITIAL_SUPPLY + ethers.parseEther("1");
+    await expect(
+      token.connect(addr1).transfer(addr2.address, tooMuch)
+    ).to.be.revertedWith("余额不足");
+  });
+});</pre>
+            </div>
+        </div>
+
+        <!-- 第四部分：节点基础设施 -->
+        <div class="content-section">
+            <h2>4️⃣ 节点基础设施与RPC提供商</h2>
+            
+            <h3>什么是节点基础设施？</h3>
+            <p>智能合约和DApp需要与区块链通信。完整节点是保存完整区块链副本的计算机。你可以自己运行（需要大量硬件和带宽），或者使用RPC服务提供商（更经济）。</p>
+
+            <h3>2025年主流RPC提供商对比</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>提供商</th>
+                        <th>支持链</th>
+                        <th>特点</th>
+                        <th>定价</th>
+                        <th>最适合</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Alchemy</strong></td>
+                        <td>15+</td>
+                        <td>最可靠、增强RPC、Notify</td>
+                        <td>免费+付费</td>
+                        <td>生产级应用</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Infura</strong></td>
+                        <td>12+</td>
+                        <td>老牌、稳定、Consensys支持</td>
+                        <td>免费+付费</td>
+                        <td>高可用性需求</td>
+                    </tr>
+                    <tr>
+                        <td><strong>QuickNode</strong></td>
+                        <td>20+</td>
+                        <td>高性能、支持最多链</td>
+                        <td>付费为主</td>
+                        <td>高流量应用</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PublicNode</strong></td>
+                        <td>15+</td>
+                        <td>完全免费、隐私友好</td>
+                        <td>完全免费</td>
+                        <td>学习和测试</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>自建节点 vs RPC服务对比</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>方面</th>
+                        <th>自建完整节点</th>
+                        <th>RPC服务</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>初始成本</strong></td>
+                        <td>高（硬件$1000+）</td>
+                        <td>低（免费或$100-1000/月）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>运维成本</strong></td>
+                        <td>高（维护、升级、监控）</td>
+                        <td>低（交给第三方）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>性能</strong></td>
+                        <td>依赖硬件（可能很慢）</td>
+                        <td>高可用，CDN加速</td>
+                    </tr>
+                    <tr>
+                        <td><strong>隐私</strong></td>
+                        <td>完全控制，但需要维护</td>
+                        <td>第三方可见交易</td>
+                    </tr>
+                    <tr>
+                        <td><strong>去中心化程度</strong></td>
+                        <td>最高（自有节点）</td>
+                        <td>降低（依赖第三方）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>推荐场景</strong></td>
+                        <td>项目成熟期或大规模</td>
+                        <td>🟦 开发和初期阶段</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>如何配置RPC端点</h3>
+            <div class="code-box">
+                <div class="code-title">
+                    <span class="code-label">JAVASCRIPT</span>
+                    .env环境变量配置示例
+                </div>
+                <pre"># 环境变量配置（.env文件）
+# 切勿将私钥提交到Git！
+
+# RPC端点
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/YOUR-PROJECT-ID
+MAINNET_RPC_URL=https://mainnet.infura.io/v3/YOUR-PROJECT-ID
+
+# 部署账户
+PRIVATE_KEY=your-private-key-here
+
+# API密钥（用于验证合约）
+ETHERSCAN_API_KEY=your-etherscan-api-key</pre>
+            </div>
+
+            <div class="code-box">
+                <div class="code-title">
+                    <span class="code-label">JAVASCRIPT</span>
+                    hardhat.config.js中配置网络
+                </div>
+                <pre>require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
+
+module.exports = {
+  solidity: "0.8.20",
+  networks: {
+    // 本地测试网络
+    hardhat: {
+      chainId: 31337,
+    },
+    // Sepolia测试网
+    sepolia: {
+      url: process.env.SEPOLIA_RPC_URL || "",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
+    // 以太坊主网
+    mainnet: {
+      url: process.env.MAINNET_RPC_URL || "",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
+  },
+};</pre>
+            </div>
+        </div>
+
+        <!-- 第五部分：安全最佳实践 -->
+        <div class="content-section">
+            <h2>5️⃣ 智能合约安全与审计最佳实践</h2>
+            
+            <h3>2025年常见的智能合约漏洞</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>漏洞类型</th>
+                        <th>描述</th>
+                        <th>严重程度</th>
+                        <th>防护方法</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>重入攻击</strong></td>
+                        <td>在外部调用回调中再次调用函数</td>
+                        <td>🔴 最严重</td>
+                        <td>CEI模式、ReentrancyGuard</td>
+                    </tr>
+                    <tr>
+                        <td><strong>整数溢出/下溢</strong></td>
+                        <td>超出整数范围导致值溢出</td>
+                        <td>🟠 高</td>
+                        <td>Solidity 0.8.0+自动检查</td>
+                    </tr>
+                    <tr>
+                        <td><strong>访问控制缺失</strong></td>
+                        <td>关键函数无权限检查</td>
+                        <td>🔴 最严重</td>
+                        <td>使用onlyOwner、onlyRole</td>
+                    </tr>
+                    <tr>
+                        <td><strong>前置运行</strong></td>
+                        <td>攻击者看到交易后抢先操作</td>
+                        <td>🟠 高</td>
+                        <td>Flashbots、隐私池</td>
+                    </tr>
+                    <tr>
+                        <td><strong>时间依赖</strong></td>
+                        <td>依赖block.timestamp进行判断</td>
+                        <td>🟡 中</td>
+                        <td>避免关键逻辑依赖时间</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>安全开发的5大最佳实践</h3>
+            <h4>1️⃣ 使用经过审计的库</h4>
+            <p>不要重复造轮子。使用<strong>OpenZeppelin</strong>等知名安全库。这些库经过审计、经历了战场考验。</p>
+
+            <h4>2️⃣ 充分的单元测试</h4>
+            <p>测试覆盖率应该超过90%。测试所有正常情况和边界情况。好的测试能早期发现问题。</p>
+
+            <h4>3️⃣ 安全审计</h4>
+            <p>部署前必须进行安全审计。可以是：</p>
+            <ul>
+                <li>自动工具：Slither、MythX - 快速发现常见问题</li>
+                <li>人工审计：Consensys、Trail of Bits - 专业深度审查</li>
+                <li>众包审计：Code4rena、Immunefi - 社区找漏洞</li>
+            </ul>
+
+            <h4>4️⃣ 分阶段部署</h4>
+            <ul>
+                <li>第1阶段：本地Hardhat网络充分测试</li>
+                <li>第2阶段：Sepolia测试网部署和验证</li>
+                <li>第3阶段：主网小额投入（Beta阶段）</li>
+                <li>第4阶段：逐步增加资金和用户</li>
+            </ul>
+
+            <h4>5️⃣ 持续监控</h4>
+            <p>部署后不是结束。使用Tenderly、Defender等监控工具持续观察合约活动。设置告警。准备应急响应计划。</p>
+
+            <div class="warning-box">
+                <strong>⚠️ 安全的重要性：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>❌ "还没被黑过"不是理由 - 只是时间问题</li>
+                    <li>❌ 审计花钱但值得 - 一个漏洞的损失远超过审计费用</li>
+                    <li>❌ 看起来没问题但不一定安全 - 复杂的攻击很难手工发现</li>
+                    <li>✅ 安全是Web3开发者的第一职责</li>
+                </ul>
+            </div>
+        </div>
+
+<div class="content-section" style="opacity: 1; transform: translateY(0px); transition: 0.6s;">
+            <h2>6️⃣ Hardhat常用命令速查表</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>命令</th>
+                        <th>功能</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>npx hardhat compile</code></td>
+                        <td>编译所有合约</td>
+                        <td>生成ABI和字节码</td>
+                    </tr>
+                    <tr>
+                        <td><code>npx hardhat test</code></td>
+                        <td>运行所有测试</td>
+                        <td>在本地网络上执行</td>
+                    </tr>
+                    <tr>
+                        <td><code>npx hardhat test --grep "transfer"</code></td>
+                        <td>运行特定测试</td>
+                        <td>只运行名称包含"transfer"的测试</td>
+                    </tr>
+                    <tr>
+                        <td><code>npx hardhat run scripts/deploy.js</code></td>
+                        <td>运行脚本</td>
+                        <td>默认在本地网络运行</td>
+                    </tr>
+                    <tr>
+                        <td><code>npx hardhat run scripts/deploy.js --network sepolia</code></td>
+                        <td>指定网络部署</td>
+                        <td>部署到Sepolia测试网</td>
+                    </tr>
+                    <tr>
+                        <td><code>npx hardhat verify ADDRESS --network sepolia</code></td>
+                        <td>验证源代码</td>
+                        <td>在Etherscan上验证</td>
+                    </tr>
+                    <tr>
+                        <td><code>npx hardhat node</code></td>
+                        <td>启动本地节点</td>
+                        <td>长期运行的本地网络</td>
+                    </tr>
+                    <tr>
+                        <td><code>npx hardhat accounts</code></td>
+                        <td>显示测试账户</td>
+                        <td>查看20个预生成的账户</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 学习检查清单 -->
+        <div class="content-section">
+            <h2>✅ 第六层学习检查清单</h2>
+            <p style="margin-bottom: 20px; color: #666;">在继续第七层之前，确保你已经掌握和实践这些内容：</p>
+            
+            <div class="checklist">
+                <h4>🔹 理论知识</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">理解Solidity基本语法和函数可见性</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">掌握CEI安全模式和重入攻击防护</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">了解Hardhat和Foundry的优缺点</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">理解节点基础设施和RPC服务</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">知道常见的智能合约漏洞和防护</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">理解安全审计的重要性和流程</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>💻 实践操作</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">编写一个简单的ERC-20代币合约</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">为合约编写单元测试（覆盖率>80%）</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9">使用Hardhat在本地网络部署</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10">在Sepolia测试网部署合约</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check11">
+                    <label for="check11">在Etherscan上验证合约源代码</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check12">
+                    <label for="check12">使用Slither进行安全扫描</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check13">
+                    <label for="check13">理解并实现CEI模式</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="check14">
+                    <label for="check14">学习Foundry的基本使用</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 推荐大V账号 -->
+        <div class="influencers-section">
+            <h2>⭐ Web3开发与安全领域推荐的业界大V（粉丝100K+）</h2>
+            <p style="color: #666; margin-bottom: 30px;">这些大V在Solidity开发、安全审计和开发工具方面有专业见解。</p>
+
+            <!-- Twitter/X 大V -->
+            <div class="platform-group">
+                <h3>🐦 Twitter/X Solidity与开发专家</h3>
+                <div class="influencers-grid">
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">SOL</div>
+                        <div class="influencer-info">
+                            <h4>Solidity</h4>
+                            <div class="influencer-handle">@solidity_lang</div>
+                            <div class="influencer-followers">🔵 185K 粉丝</div>
+                            <span class="influencer-tag">官方账号</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">HH</div>
+                        <div class="influencer-info">
+                            <h4>Hardhat</h4>
+                            <div class="influencer-handle">@HardhatHQ</div>
+                            <div class="influencer-followers">🔵 152K 粉丝</div>
+                            <span class="influencer-tag">开发框架</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">OZ</div>
+                        <div class="influencer-info">
+                            <h4>OpenZeppelin</h4>
+                            <div class="influencer-handle">@OpenZeppelin</div>
+                            <div class="influencer-followers">🔵 285K 粉丝</div>
+                            <span class="influencer-tag">安全库</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">AL</div>
+                        <div class="influencer-info">
+                            <h4>Alchemy</h4>
+                            <div class="influencer-handle">@AlchemyPlatform</div>
+                            <div class="influencer-followers">🔵 287K 粉丝</div>
+                            <span class="influencer-tag">基础设施</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">AA</div>
+                        <div class="influencer-info">
+                            <h4>0xAA</h4>
+                            <div class="influencer-handle">@0xAA_Science</div>
+                            <div class="influencer-followers">🔵 118K 粉丝</div>
+                            <span class="influencer-tag">Solidity教育</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">RM</div>
+                        <div class="influencer-info">
+                            <h4>Remix Project</h4>
+                            <div class="influencer-handle">@RemixProject</div>
+                            <div class="influencer-followers">🔵 142K 粉丝</div>
+                            <span class="influencer-tag">IDE工具</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">TB</div>
+                        <div class="influencer-info">
+                            <h4>Trail of Bits</h4>
+                            <div class="influencer-handle">@trailofbits</div>
+                            <div class="influencer-followers">🔵 127K 粉丝</div>
+                            <span class="influencer-tag">安全审计</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">CD</div>
+                        <div class="influencer-info">
+                            <h4>Consensys Diligence</h4>
+                            <div class="influencer-handle">@ConsenSys</div>
+                            <div class="influencer-followers">🔵 243K 粉丝</div>
+                            <span class="influencer-tag">审计服务</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YouTube 大V -->
+            <div class="platform-group">
+                <h3>▶️ YouTube Solidity与开发教程频道</h3>
+                <div class="influencers-grid">
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">PC</div>
+                        <div class="influencer-info">
+                            <h4>Patrick Collins</h4>
+                            <div class="influencer-handle">@PatrickAlphaC</div>
+                            <div class="influencer-followers">📺 426K 订阅</div>
+                            <span class="influencer-tag">完整教程</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">CZ</div>
+                        <div class="influencer-info">
+                            <h4>CryptoZombies</h4>
+                            <div class="influencer-handle">交互式教程</div>
+                            <div class="influencer-followers">📺 200K+ 学员</div>
+                            <span class="influencer-tag">初学友好</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">CE</div>
+                        <div class="influencer-info">
+                            <h4>Code Eater</h4>
+                            <div class="influencer-handle">Solidity深度讲解</div>
+                            <div class="influencer-followers">📺 267K 订阅</div>
+                            <span class="influencer-tag">技术深入</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">SC</div>
+                        <div class="influencer-info">
+                            <h4>Smart Contract Programmer</h4>
+                            <div class="influencer-handle">高级Solidity</div>
+                            <div class="influencer-followers">📺 158K 订阅</div>
+                            <span class="influencer-tag">进阶内容</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">AL</div>
+                        <div class="influencer-info">
+                            <h4>Alchemy</h4>
+                            <div class="influencer-handle">Web3基础设施</div>
+                            <div class="influencer-followers">📺 145K 订阅</div>
+                            <span class="influencer-tag">开发工具</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">DU</div>
+                        <div class="influencer-info">
+                            <h4>Dapp University</h4>
+                            <div class="influencer-handle">开发角度</div>
+                            <div class="influencer-followers">📺 234K 订阅</div>
+                            <span class="influencer-tag">技术实践</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">EF</div>
+                        <div class="influencer-info">
+                            <h4>Ethereum Foundation</h4>
+                            <div class="influencer-handle">官方频道</div>
+                            <div class="influencer-followers">📺 183K 订阅</div>
+                            <span class="influencer-tag">官方内容</span>
+                        </div>
+                    </div>
+
+                    <div class="influencer-card">
+                        <div class="influencer-avatar">W3A</div>
+                        <div class="influencer-info">
+                            <h4>Web3 Academy</h4>
+                            <div class="influencer-handle">综合教程</div>
+                            <div class="influencer-followers">📺 189K 订阅</div>
+                            <span class="influencer-tag">系统课程</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>💡 Web3开发学习建议：</strong>
+                <ul style="margin: 10px 0 0 0;">
+                    <li>从Patrick Collins的完整教程开始 - 涵盖从零到生产级</li>
+                    <li>使用CryptoZombies学习Solidity基础 - 最好的交互式入门</li>
+                    <li>关注OpenZeppelin和Solidity官方 - 获得最新安全建议</li>
+                    <li>参加Code4rena审计 - 真实环境中学习安全</li>
+                    <li>加入开发社区（Discord、Twitter）- 获得同行支持</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <div class="footer-nav">
+            <button class="btn-secondary" onclick="window.location.href='web5.html'">⬅️ 返回第五层</button>
+            <button class="btn-secondary" onclick="window.location.href='home.html'">⬅️ 返回主页</button>
+            <button class="btn-primary" onclick="window.location.href='web7.html'">➡️ 前往第七层</button>
+        </div>
+    </div>
+
+    <script>
+        // 检查清单功能
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(this.id, this.checked);
+            });
+            this.checked = localStorage.getItem(checkbox.id) === 'true';
+        });
+
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            const sections = document.querySelectorAll('.content-section, .influencers-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
